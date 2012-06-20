@@ -22,24 +22,20 @@
     <div class="container">
     
         <div class="row" id="gv-header">
-            <div class="span4">
-                <div class="well"><a href="http://globalvoicesonline.org/"><img src="img/gv-logo.png"></a></div>
-            </div>
-            <div class="span8">
+            <div class="span12">
                 <div class="well">
-                <h1>The world is talking, are you listening?</h1>
-                <h2>Get to Know &nbsp;<input id="gv-country" placeholder="a country" type="text" placeholder=""/></h2>
+                    <div class="row">
+                        <div class="span9"><h1>Get to Know &nbsp;</h1><input id="gv-country" placeholder="a country" type="text" placeholder=""/></div>
+                        <div class="span2"><a href="http://globalvoicesonline.org/"><img src="img/gv-logo.png"></a></div>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <div class="row" id="gv-stories" style="display:none;">
-            <div class="span4 gv-story" id="gv-story-1">1
-            </div>
-            <div class="span4 gv-story" id="gv-story-2">2
-            </div>
-            <div class="span4 gv-story" id="gv-story-3">2
-            </div>
+        <div class="row" id="gv-stories">
+            <div class="span4 gv-story" id="gv-story-1"></div>
+            <div class="span4 gv-story" id="gv-story-2"></div>
+            <div class="span4 gv-story" id="gv-story-3"></div>
         </div>
         
         <div class="row" id="gv-footer">
@@ -64,7 +60,7 @@ function lookupCountry(){
     if (_.has(gvCountryToStoryPath,currentCountry) ){
         rssUrl = "http://globalvoicesonline.org"+gvCountryToStoryPath[currentCountry]+"feed";
         $('#gv-country').attr('disabled', 'disabled');
-        $('#gv-stories').hide();
+        $('.gv-story').hide();
         requestGlobalVoicesContent(rssUrl);
         requestBackgroundMap(currentCountry);
     }
@@ -104,7 +100,7 @@ function updateStories(stories){
     updateOneStory(stories[0], $('#gv-story-1'));
     updateOneStory(stories[1], $('#gv-story-2'));
     updateOneStory(stories[2], $('#gv-story-3'));
-    $('#gv-stories').show();
+    $('.gv-story').show();
 }
 
 function updateOneStory(story, dest){

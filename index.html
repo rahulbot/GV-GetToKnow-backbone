@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Get To Know ________</title>
+    <title>Global Voices: Get To Know ________</title>
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0;" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -33,9 +33,12 @@
         </div>
         
         <div class="row" id="gv-stories">
-            <div class="span4 gv-story" id="gv-story-1"></div>
-            <div class="span4 gv-story" id="gv-story-2"></div>
-            <div class="span4 gv-story" id="gv-story-3"></div>
+            <div class="span4 offset4 well" id="gv-loading" style="display:none;">
+                <div class="progress progress-striped active"><div class="bar" style="width: 100%"></div></div>
+            </div>
+            <div class="span4 gv-story" id="gv-story-1" style="display:none;"></div>
+            <div class="span4 gv-story" id="gv-story-2" style="display:none;"></div>
+            <div class="span4 gv-story" id="gv-story-3" style="display:none;"></div>
         </div>
         
         <div class="row" id="gv-footer">
@@ -61,6 +64,7 @@ function lookupCountry(){
         rssUrl = "http://globalvoicesonline.org"+gvCountryToStoryPath[currentCountry]+"feed";
         $('#gv-country').attr('disabled', 'disabled');
         $('.gv-story').hide();
+        $('#gv-loading').show();
         requestGlobalVoicesContent(rssUrl);
         requestBackgroundMap(currentCountry);
     }
@@ -96,10 +100,10 @@ function updateBackgroundMap(data){
 function updateStories(stories){
     console.log(stories);
     $('#gv-country').attr('disabled', false);
-    // put in content
     updateOneStory(stories[0], $('#gv-story-1'));
     updateOneStory(stories[1], $('#gv-story-2'));
     updateOneStory(stories[2], $('#gv-story-3'));
+    $('#gv-loading').hide();
     $('.gv-story').show();
 }
 
@@ -109,11 +113,10 @@ function updateOneStory(story, dest){
 }
 
 function prepareInterface(){
-    $("#gv-map").attr('src',"http://maps.stamen.com/watercolor/embed#2/42.6/109.0");
     $('#gv-country').typeahead({source:_.keys(gvCountryToStoryPath)}).change(lookupCountry);
     $('#gv-country').focus();
+    $("#gv-map").attr('src',"http://maps.stamen.com/watercolor/embed#2/42.6/109.0");
 }
-
 
 $(prepareInterface);
 

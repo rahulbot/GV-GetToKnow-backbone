@@ -1,7 +1,7 @@
-Bootstrap.js Example - Get To Know : Global Voices
-==================================================
+Backbone.js Example - Get To Know : Global Voices
+=================================================
 
-Small example Boostrap.js applicaton for the MAS.s60 course.
+Small example Backbone.js applicaton for the MAS.s60 course.
 
 Use
 ---
